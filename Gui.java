@@ -9,11 +9,12 @@ public class Gui extends JFrame implements ActionListener{
 	private Container c;
     MakeDoneListener aMakeDoneListener;
     RemoveListener aRemoveListener;
+    JButton addButton;
 
     public Gui() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("ToDoリスト管理");
-        setSize(500, 370);
+        setSize(510, 370);
         c = getContentPane();
         c.setLayout(null);
 
@@ -36,9 +37,9 @@ public class Gui extends JFrame implements ActionListener{
             labelArray[i].setBounds(35,i*30 + 10,300,20);
         }
         
-        JButton addButton = new JButton("タスクを追加");
+        addButton = new JButton("タスクを追加");
         c.add(addButton);
-        addButton.setBounds(350,120,110,40);
+        addButton.setBounds(350,120,130,40);
         addButton.setMargin(new Insets(5, 5, 5, 5));
         addButton.addActionListener(this);
         
@@ -75,6 +76,14 @@ public class Gui extends JFrame implements ActionListener{
             buttonArray[i].setText("〇");
             buttonArray[i].setEnabled(false);
             labelArray[i].setText("");
+        }
+        // タスク数が10以下になるように調整
+        if (toDoList.size() == 10) {
+            addButton.setText("タスクが一杯です");
+            addButton.setEnabled(false);
+        } else {
+            addButton.setText("タスクを追加");
+            addButton.setEnabled(true);
         }
     }
     public void renewListener() {
